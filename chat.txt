@@ -1,0 +1,878 @@
+Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them.
+[5/5/26, 8:01:13 PM] - [Call]
+[5/21/26, 8:01:15 AM] - Sarii added You
+[5/21/26, 2:00:01 PM] You: [Forwarded] <document omitted> manu7.pdf
+[5/21/26, 2:00:01 PM] You: [Forwarded] <document omitted> dbms lab 03.pdf
+[5/21/26, 7:06:18 PM] Sarii: [Forwarded] <album message>
+[5/21/26, 7:06:18 PM] Sarii: [Forwarded] <image omitted>
+[5/21/26, 7:06:18 PM] Sarii: [Forwarded] <image omitted>
+[5/21/26, 7:06:19 PM] Sarii: [Forwarded] <image omitted>
+[5/21/26, 7:06:19 PM] Sarii: <unknown message>
+[5/21/26, 7:06:19 PM] Sarii: <unknown message>
+[5/21/26, 7:06:20 PM] Sarii: <unknown message>
+[5/21/26, 10:13:27 PM] Sarii: [Forwarded] <image omitted>
+[5/21/26, 10:13:28 PM] Sarii: <unknown message>
+[5/27/26, 3:58:11 PM] You: @Sarii signature kara hua paper sadhana ke pass dekar ja
+[5/27/26, 3:58:23 PM] You: Aict ka
+[5/27/26, 4:31:34 PM] Sarii: Shruti ke pas he
+[6/1/26, 9:26:10 PM] You: You deleted this message
+[6/1/26, 9:26:15 PM] You: 3 and 4
+[6/1/26, 9:27:11 PM] You: You deleted this message
+[6/1/26, 9:27:17 PM] You: 3 and 5
+[6/1/26, 9:33:50 PM] Sadhana Kantakutle: Ye shivani
+[6/1/26, 9:33:54 PM] Sadhana Kantakutle: 3+5
+[6/1/26, 9:33:59 PM] Sadhana Kantakutle: 4+5
+[6/1/26, 9:34:05 PM] Sadhana Kantakutle: 3+4 nahi
+[6/1/26, 9:34:21 PM] You: Ha
+[6/1/26, 9:35:27 PM] You: You deleted this message
+[6/1/26, 9:37:06 PM] Sadhana Kantakutle: Hi
+[6/1/26, 9:37:10 PM] Sadhana Kantakutle: Send kar na
+[6/1/26, 9:37:51 PM] You: Kare
+[6/1/26, 9:37:53 PM] You: .
+[6/1/26, 9:38:22 PM] Sadhana Kantakutle: 4or 5 ka hai
+[6/1/26, 9:38:23 PM] Sadhana Kantakutle: O
+[6/1/26, 9:38:29 PM] Sadhana Kantakutle: 3or5 ka kar
+[6/1/26, 9:38:40 PM] Sadhana Kantakutle: A* ka kr
+[6/1/26, 9:38:45 PM] Sadhana Kantakutle: Ao * ka nahi
+[6/1/26, 9:40:39 PM] You: # AO* and 8-Queens Combined Program
+
+# ---------- AO* ----------
+class Node:
+    def _init_(self, name, and_node=False):
+        self.name = name
+        self.and_node = and_node
+        self.children = []
+
+def show(node, level=0):
+    print("  " * level + node.name +
+          (" (AND node)" if node.and_node else " (OR node)"))
+    for child in node.children:
+        show(child, level + 1)
+
+A = Node("A")
+B = Node("B", True)
+C = Node("C")
+D = Node("D")
+E = Node("E")
+F = Node("F")
+
+A.children = [B, C]
+B.children = [D, E]
+C.children = [F]
+
+print("AO* Output:")
+show(A)
+
+# ---------- 8-Queens ----------
+def safe(board, row, col):
+    for i in range(row):
+        if board[i] == col or abs(board[i] - col) == abs(i - row):
+            return False
+    return True
+
+def solve(board, row, n):
+    if row == n:
+        return True
+    for col in range(n):
+        if safe(board, row, col):
+            board[row] = col
+            if solve(board, row + 1, n):
+                return True
+    return False
+
+n = 8
+board = [-1] * n
+solve(board, 0, n)
+
+print("\n8-Queens Output:")
+for r in range(n):
+    for c in range(n):
+        print("Q" if board[r] == c else ".", end=" ")
+    print()
+[6/1/26, 9:41:02 PM] You: You deleted this message
+[6/1/26, 9:42:13 PM] Sadhana Kantakutle: Firse ohi karo send
+[6/1/26, 9:42:21 PM] You: You deleted this message
+[6/1/26, 9:43:08 PM] You: 3 aur 5
+[6/1/26, 9:46:51 PM] You: import heapq
+
+# ---------- A* Search ----------
+graph = {
+    'A':[('B',1),('C',4)],
+    'B':[('D',2),('E',5)],
+    'C':[('F',3)],
+    'D':[('G',1)],
+    'E':[('G',2)],
+    'F':[('G',2)],
+    'G':[]
+}
+
+h = {'A':7,'B':6,'C':2,'D':1,'E':4,'F':3,'G':0}
+
+def astar(start, goal):
+    pq = [(h[start], 0, start, [start])]
+    while pq:
+        f, g, node, path = heapq.heappop(pq)
+        if node == goal:
+            return path
+        for nxt, cost in graph[node]:
+            heapq.heappush(
+                pq,
+                (g + cost + h[nxt], g + cost, nxt, path + [nxt])
+            )
+
+print("A* Output:")
+print("Path found:", astar('A', 'G'))
+
+# ---------- 8 Queens ----------
+def safe(pos, r, c):
+    for i in range(r):
+        if pos[i] == c or abs(pos[i]-c) == abs(i-r):
+            return False
+    return True
+
+def solve(pos, r):
+    if r == 8:
+        return True
+    for c in range(8):
+        if safe(pos, r, c):
+            pos[r] = c
+            if solve(pos, r+1):
+                return True
+    return False
+
+pos = [-1] * 8
+solve(pos, 0)
+
+print("\n8-Queens Output:")
+for r in range(8):
+    for c in range(8):
+        print("Q" if pos[r] == c else ".", end=" ")
+    print()
+[6/2/26, 9:33:54 PM] You: from heapq import heappush, heappop
+
+def valid(m, c):
+    return (m == 0 or m >= c) and (3-m == 0 or 3-m >= 3-c)
+
+def best_first():
+    pq = [(6, (3, 3, 1))]
+    visited = set()
+
+    while pq:
+        _, (m, c, b) = heappop(pq)
+
+        if (m, c, b) == (0, 0, 0):
+            return True
+
+        if (m, c, b) in visited:
+            continue
+        visited.add((m, c, b))
+
+        for dm, dc in [(1,0), (2,0), (0,1), (0,2), (1,1)]:
+            nm, nc = (m-dm, c-dc) if b else (m+dm, c+dc)
+            if 0 <= nm <= 3 and 0 <= nc <= 3 and valid(nm, nc):
+                heappush(pq, (nm+nc, (nm, nc, 1-b)))
+
+    return False
+
+print("Output found" if best_first() else "No Output")
+[6/2/26, 9:33:58 PM] You: 2
+[6/2/26, 9:35:04 PM] You: def dfs():
+    stack=[(0,0)]
+    seen=set()
+
+    while stack:
+        a,b=stack.pop()
+
+        if (a,b) in seen:
+            continue
+        seen.add((a,b))
+
+        print("Exploring:",(a,b))
+
+        if (a,b)==(2,0):
+            print("Goal reached:",(a,b))
+            return True
+
+        stack += [
+            (4,b), (a,3),      # fill jugs
+            (0,b), (a,0),      # empty jugs
+            (a-min(a,3-b), b+min(a,3-b)),  # 1->2
+            (a+min(b,4-a), b-min(b,4-a))   # 2->1
+        ]
+
+    return False
+
+print(dfs())
+[6/2/26, 9:35:06 PM] You: 1
+[6/3/26, 11:29:54 AM] Sarii: Hi
+[6/3/26, 11:30:10 AM] Sarii: Class ko nhi jarhe ho kya
+[6/3/26, 11:42:11 AM] Sadhana Kantakutle: Alo
+[6/4/26, 9:10:23 AM] Sarii: Hi
+[6/4/26, 9:10:32 AM] Sarii: Me class ko aai hu
+[6/4/26, 9:13:19 AM] You: Class ko gayi?
+[6/4/26, 9:13:47 AM] Sarii: Ha
+[6/4/26, 9:13:49 AM] Sarii: Bol
+[6/4/26, 9:14:04 AM] You: Hum nahi gaya
+[6/4/26, 9:14:05 AM] Sarii: Tu call nhi uthai
+[6/4/26, 9:14:15 AM] Sarii: Ha
+[6/4/26, 9:14:15 AM] You: Sadhana ko bole me
+[6/4/26, 9:14:30 AM] You: Tujhe call karne ko
+[6/4/26, 9:14:41 AM] Sarii: Ha
+[6/4/26, 9:14:59 AM] Sarii: Me bhi only maths class ko hi aai
+[6/4/26, 9:15:12 AM] You: <sticker omitted>
+[6/4/26, 9:15:25 AM] You: Hum break me ja rahe ha
+[6/4/26, 9:15:45 AM] You: DBMS report dekhna ha
+[6/4/26, 9:15:53 AM] Sarii: Ok
+[6/4/26, 9:16:29 AM] Sarii: Me bhi aau kya
+[6/4/26, 9:16:42 AM] Sarii: Nako
+[6/4/26, 9:16:53 AM] Sadhana Kantakutle: Jana mhant Hotis ki
+[6/4/26, 9:17:17 AM] Sadhana Kantakutle: Vaishnavi boli thi usako nahi jate bolke
+[6/4/26, 9:17:34 AM] Sarii: Tu maza aaykayla bi nahis call cut kelis ki
+[6/4/26, 9:17:54 AM] Sadhana Kantakutle: Jana mhanlis mg ajun kay ayakayach hot tuz
+[6/4/26, 9:18:08 AM] Sarii: Ha
+[6/4/26, 9:18:18 AM] Sarii: Sir aahet g
+[6/4/26, 9:18:20 AM] Sarii: By
+[6/4/26, 9:18:28 AM] Sadhana Kantakutle: Ha
+[6/4/26, 10:08:27 AM] Sarii: <image omitted>
+[6/4/26, 10:09:03 AM] You: <sticker omitted>
+[6/4/26, 10:12:34 AM] Sarii: Or o DBMS ke questions mam die he na o hi  pado
+[6/4/26, 10:14:16 AM] Sarii: Kyu ki mam ne question paper hi di he
+[6/4/26, 10:32:53 AM] Sarii: DBMS attendance sadhana cha 28
+[6/4/26, 10:33:19 AM] Sadhana Kantakutle: Kiti class paaiki
+[6/4/26, 10:33:21 AM] Sarii: Shivani cha 27
+[6/4/26, 10:33:46 AM] Sarii: 34
+[6/4/26, 11:04:12 AM] You: <document omitted> DBMS MINIPROJECT FORMAT.docx
+[6/4/26, 5:41:11 PM] Sadhana Kantakutle: Hi
+[6/4/26, 5:41:22 PM] Sadhana Kantakutle: ADA kay exam 12 date ko hai or
+[6/4/26, 5:41:31 PM] Sadhana Kantakutle: 7to 12 problem hai
+[6/4/26, 5:41:53 PM] Sadhana Kantakutle: Or observation book likhana 12 program
+[6/4/26, 5:42:07 PM] Sadhana Kantakutle: Or general ka printout leke Jana
+[6/4/26, 5:46:03 PM] Sarii: Ok
+[6/6/26, 6:49:36 PM] Sadhana Kantakutle: <image omitted>
+[6/6/26, 6:49:43 PM] Sadhana Kantakutle: Maths
+[6/6/26, 6:49:52 PM] Sadhana Kantakutle: Manju send kari
+[6/6/26, 7:06:18 PM] You: 👍🏻
+[6/6/26, 9:34:54 PM] Sarii: [Forwarded] AI important 
+1.Greedy Best first search 
+2.A* search algorithm 
+3.Syntax and Semantics of First order logic 
+4.Explain Bayes Rule in detail 
+5.Forward Chaining Algorithm 
+6.Explain following with respect to First order logic 
+a.Assertion and queries 
+b.Numbers set and lists 
+c.The Wumpus world
+[6/6/26, 9:40:34 PM] You: <sticker omitted>
+[6/6/26, 9:40:48 PM] Sadhana Kantakutle: Answer send kar shivani
+[6/6/26, 9:40:53 PM] Sadhana Kantakutle: Vatana pdf send kar
+[6/6/26, 9:41:06 PM] You: Ai ka?
+[6/6/26, 9:42:08 PM] You: <document omitted> BAD402-module-3-pdf.pdf
+[6/6/26, 9:42:46 PM] You: <document omitted> BAD402-module-4-pdf.pdf
+[6/6/26, 9:44:00 PM] You: <document omitted> BAD402-module-5-pdf.pdf
+[6/6/26, 10:10:40 PM] Sadhana Kantakutle: <album message>
+[6/6/26, 10:10:40 PM] Sadhana Kantakutle: <image omitted>
+[6/6/26, 10:10:40 PM] Sadhana Kantakutle: <image omitted>
+[6/6/26, 10:10:41 PM] Sadhana Kantakutle: <image omitted>
+[6/6/26, 10:10:41 PM] Sadhana Kantakutle: <image omitted>
+[6/6/26, 10:10:42 PM] Sadhana Kantakutle: <image omitted>
+[6/6/26, 11:59:07 PM] You: <document omitted> DBMS1.docx
+[6/7/26, 12:01:08 AM] You: <document omitted> DBMS1.docx
+[6/7/26, 12:11:52 AM] Sarii: <GIF omitted>
+[6/7/26, 12:21:42 AM] Sadhana Kantakutle: <album message>
+[6/7/26, 12:21:44 AM] Sadhana Kantakutle: <image omitted>
+[6/7/26, 12:21:44 AM] Sadhana Kantakutle: <image omitted>
+[6/7/26, 12:21:47 AM] Sadhana Kantakutle: Aise kyu huwa re pdf
+[6/7/26, 1:05:03 AM] You: Tere phone ke app aise aaya hai
+[6/7/26, 1:07:35 AM] Sadhana Kantakutle: Ok
+[6/7/26, 6:24:12 PM] You: <document omitted> BCS401-module-3-written.pdf
+[6/7/26, 6:26:29 PM] Sadhana Kantakutle: [Forwarded] <document omitted> BCS401-module-4-written.pdf
+[6/7/26, 7:32:48 PM] Sarii: <image omitted>
+[6/7/26, 9:04:04 PM] You: 🥳🥳
+[6/7/26, 9:04:05 PM] You: 😂😂
+[6/7/26, 9:04:09 PM] You: <sticker omitted>
+[6/7/26, 9:04:12 PM] You: <sticker omitted>
+[6/7/26, 9:04:16 PM] You: <sticker omitted>
+[6/7/26, 9:06:39 PM] Sarii: <sticker omitted>
+[6/7/26, 9:09:35 PM] Sarii: <sticker omitted>
+[6/8/26, 12:16:11 PM] Sarii: [Forwarded] <sticker omitted>
+[6/8/26, 12:18:55 PM] You: <sticker omitted>
+[6/8/26, 12:18:59 PM] You: <sticker omitted>
+[6/8/26, 12:19:39 PM] Sarii: <GIF omitted>
+[6/8/26, 1:03:12 PM] Sadhana Kantakutle: <sticker omitted>
+[6/8/26, 1:03:14 PM] Sadhana Kantakutle: <sticker omitted>
+[6/8/26, 1:03:14 PM] Sadhana Kantakutle: <sticker omitted>
+[6/8/26, 1:03:14 PM] Sadhana Kantakutle: <sticker omitted>
+[6/8/26, 1:03:15 PM] Sadhana Kantakutle: <sticker omitted>
+[6/8/26, 1:03:16 PM] Sadhana Kantakutle: <sticker omitted>
+[6/8/26, 1:03:16 PM] Sadhana Kantakutle: <sticker omitted>
+[6/8/26, 1:03:48 PM] Sadhana Kantakutle: He vala sticker o bheja hai 🫣
+[6/8/26, 1:03:48 PM] Sadhana Kantakutle: Or  ye bhi
+[6/8/26, 1:06:39 PM] Sarii: <sticker omitted>
+[6/8/26, 11:31:52 PM] Sadhana Kantakutle: Kal maths assignment karenge re
+[6/8/26, 11:31:55 PM] Sadhana Kantakutle: Sub log
+[6/8/26, 11:32:39 PM] Sarii: Huva likhana
+[6/8/26, 11:32:47 PM] Sarii: ?
+[6/8/26, 11:33:25 PM] Sadhana Kantakutle: Aja submit karayach hot sir n sangital ahe mhan 8 date la kara mhanun submit
+[6/8/26, 11:33:35 PM] Sadhana Kantakutle: Aja tar gel ata udhya karav lagal
+[6/8/26, 11:33:41 PM] Sadhana Kantakutle: Tuz zal nahi ka
+[6/8/26, 11:34:21 PM] You: 5th module send kar
+[6/8/26, 11:34:31 PM] Sarii: Thoda aahe aajun
+[6/8/26, 11:34:36 PM] Sadhana Kantakutle: Ha
+[6/8/26, 11:34:42 PM] Sadhana Kantakutle: Lihi mg
+[6/8/26, 11:34:49 PM] You: ☝🏻☝🏻
+[6/8/26, 11:34:51 PM] Sarii: Aata
+[6/8/26, 11:35:07 PM] You: <sticker omitted>
+[6/8/26, 11:35:21 PM] Sadhana Kantakutle: Mg kava karatis submit
+[6/8/26, 11:35:46 PM] Sarii: Exam zal ki
+[6/8/26, 11:35:59 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:36:06 PM] Sadhana Kantakutle: Mg amahi karav udhya
+[6/8/26, 11:36:14 PM] Sarii: Ok
+[6/8/26, 11:36:15 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:36:24 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:36:33 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:36:37 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:36:48 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:36:59 PM] Sadhana Kantakutle: Ye 1 question paper huwa
+[6/8/26, 11:37:23 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:37:29 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:37:30 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:37:40 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:37:43 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:37:51 PM] Sadhana Kantakutle: <image omitted>
+[6/8/26, 11:38:07 PM] Sadhana Kantakutle: Ye 2 question paper
+[6/8/26, 11:47:45 PM] You: <sticker omitted>
+[6/9/26, 6:59:16 PM] Sadhana Kantakutle: <album message>
+[6/9/26, 7:00:13 PM] Sadhana Kantakutle: <image omitted>
+[6/9/26, 7:00:14 PM] Sadhana Kantakutle: <image omitted>
+[6/9/26, 7:00:14 PM] Sadhana Kantakutle: <image omitted>
+[6/9/26, 7:00:15 PM] Sadhana Kantakutle: <image omitted>
+[6/9/26, 7:00:15 PM] Sadhana Kantakutle: <image omitted>
+[6/9/26, 7:00:16 PM] Sadhana Kantakutle: <image omitted>
+[6/9/26, 7:00:17 PM] Sadhana Kantakutle: <image omitted>
+[6/9/26, 7:01:33 PM] You: <sticker omitted>
+[6/9/26, 9:57:04 PM] Sarii: [Forwarded] <document omitted> 2nd IA Answers.pdf
+[6/9/26, 11:02:49 PM] You: <sticker omitted>
+[6/9/26, 11:02:50 PM] You: <sticker omitted>
+[6/10/26, 11:15:40 AM] Sadhana Kantakutle: [Forwarded] <document omitted> BUHK408-module-1-MCQe.pdf
+[6/10/26, 11:15:40 AM] Sadhana Kantakutle: [Forwarded] <document omitted> BUHK408-module-2-MCQ.pdf
+[6/11/26, 8:30:33 AM] You: [Forwarded] <document omitted> BCSL404_LAB-MANUAL.pdf
+[6/11/26, 8:41:43 AM] Sadhana Kantakutle: <image omitted>
+[6/11/26, 4:47:31 PM] Sadhana Kantakutle: <image omitted>
+[6/12/26, 5:06:22 PM] Sarii: <album message>
+[6/12/26, 5:06:23 PM] Sarii: <image omitted>
+[6/12/26, 5:06:23 PM] Sarii: <image omitted>
+[6/12/26, 5:06:24 PM] Sarii: <image omitted>
+[6/12/26, 5:06:25 PM] Sarii: <image omitted>
+[6/12/26, 5:06:26 PM] Sarii: <video omitted>
+[6/13/26, 10:55:58 AM] - You changed the group icon
+[6/13/26, 11:04:12 AM] - Sadhana Kantakutle changed the group icon
+[6/13/26, 11:14:38 AM] - Sarii changed settings: only admins can edit group info
+[6/13/26, 11:15:10 AM] - Sarii changed settings: only admins can edit group info
+[6/13/26, 11:15:24 AM] - You changed the group icon
+[6/13/26, 11:15:26 AM] - Sarii changed settings: only admins can edit group info
+[6/15/26, 2:15:33 PM] - You added Sadhana Kantakutle
+[6/17/26, 6:24:03 PM] You: <document omitted> BAD402-june-july-2024-solution.pdf
+[6/17/26, 6:24:47 PM] You: <document omitted> BAD402-dec-2024-jan-2025.pdf
+[6/17/26, 6:25:33 PM] You: <document omitted> BAD402-june-july-2025-makeup.pdf
+[6/17/26, 6:27:00 PM] You: <document omitted> BAD402-dec-2025-jan-2026.pdf
+[6/17/26, 6:36:43 PM] You: <document omitted> BAD402-module-3-pdf.pdf
+[6/17/26, 6:36:43 PM] You: <document omitted> BAD402-module-4-pdf.pdf
+[6/17/26, 6:36:43 PM] You: <document omitted> BAD402-module-5-pdf.pdf
+[6/17/26, 7:22:49 PM] You: <image omitted>
+[6/17/26, 7:25:09 PM] Sarii: 🙏🫶
+[6/19/26, 11:36:40 AM] Sadhana Kantakutle: 🙏🏻
+[6/19/26, 11:37:03 AM] You: 😇
+[6/19/26, 12:12:03 PM] Sadhana Kantakutle: Aa re
+[6/19/26, 12:12:07 PM] Sadhana Kantakutle: Shivani
+[6/19/26, 3:37:46 PM] Sarii: ADA ke notes he to send karo
+[6/19/26, 3:40:17 PM] You: Nahi hai 😶
+[6/19/26, 3:40:30 PM] Sarii: Ok
+[6/19/26, 4:21:56 PM] Sarii: 🙏🥰
+[6/19/26, 6:45:25 PM] You: ❤️
+[6/22/26, 9:49:20 PM] Sarii: [Forwarded] <album message>
+[6/22/26, 9:49:20 PM] Sarii: [Forwarded] <document omitted> BAD402_AI_2022_Scheme_Important_Questions.pdf
+[6/22/26, 9:49:20 PM] Sarii: [Forwarded] <document omitted> AI BAD402  (1).pdf
+[6/22/26, 9:49:21 PM] Sarii: [Forwarded] <document omitted> BAD402-module-5-pdf.pdf
+[6/22/26, 9:49:21 PM] Sarii: [Forwarded] <document omitted> BAD402-module-4-pdf.pdf
+[6/22/26, 9:49:21 PM] Sarii: [Forwarded] <document omitted> BAD402-module-2-pdf.pdf
+[6/22/26, 9:49:22 PM] Sarii: [Forwarded] <document omitted> BAD402-module-3-pdf.pdf
+[6/22/26, 9:49:22 PM] Sarii: [Forwarded] <image omitted>
+[6/22/26, 9:49:22 PM] Sarii: [Forwarded] <image omitted>
+[6/22/26, 9:49:23 PM] Sarii: [Forwarded] <image omitted>
+[6/22/26, 9:49:23 PM] Sarii: [Forwarded] <image omitted>
+[6/22/26, 9:49:23 PM] Sarii: [Forwarded] <image omitted>
+[6/22/26, 9:52:52 PM] You: <sticker omitted>
+[6/28/26, 6:05:28 PM] Sarii: [Forwarded] <document omitted> DBMS_Module2-QA.docx_104251.pdf
+[6/28/26, 6:08:05 PM] Sarii: [Forwarded] <document omitted> DBMS_Module4-QA.docx.pdf
+[6/28/26, 6:10:05 PM] Sarii: [Forwarded] <document omitted> DBMS_Module1-QA (2).docx.pdf
+[6/28/26, 6:23:34 PM] Sarii: [Forwarded] <document omitted> DBMS ori.pdf
+[6/28/26, 10:11:15 PM] You: ❤️
+[7/1/26, 9:10:32 AM] Sadhana Kantakutle: [Forwarded many times] <document omitted> uhv-mcq-module-1.pdf
+[7/1/26, 9:10:32 AM] Sadhana Kantakutle: [Forwarded many times] <document omitted> uhv-module-2-mcq.pdf
+[7/1/26, 9:10:32 AM] Sadhana Kantakutle: [Forwarded] <document omitted> 21UHV49 UHV Module 5.pdf
+[7/1/26, 9:10:33 AM] Sadhana Kantakutle: [Forwarded] <document omitted> uhv-module-3-part-1-some.pdf
+[7/1/26, 9:10:33 AM] Sadhana Kantakutle: [Forwarded] <document omitted> uhv-module-4-notes.pdf
+[7/1/26, 9:21:42 AM] Sarii: 🙏
+[7/1/26, 9:22:43 AM] You: 🫡
+[7/1/26, 7:42:48 PM] You: https://youtu.be/Lt1w_2YyaCg?si=1owvsKznquKtiwbA
+[7/1/26, 8:59:56 PM] Sarii: 🙏
+[7/5/26, 8:08:49 PM] Sadhana Kantakutle: <album message>
+[7/5/26, 8:08:54 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:54 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:55 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:55 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:55 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:56 PM] Sadhana Kantakutle: This message was deleted by admin Sarii
+[7/5/26, 8:08:56 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:56 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:57 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:57 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:57 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:58 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:58 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:59 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:59 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:08:59 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:09:00 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:09:00 PM] Sadhana Kantakutle: This message was deleted by admin Sarii
+[7/5/26, 8:09:00 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 8:09:01 PM] Sadhana Kantakutle: <image omitted>
+[7/5/26, 10:50:57 PM] - Sarii made You an admin
+[7/5/26, 11:50:16 PM] - [Call]
+[7/5/26, 11:50:38 PM] - [Call]
+[7/6/26, 12:44:06 AM] You: Sadhana...
+[7/6/26, 12:44:15 AM] You: Single photo bhej
+[7/6/26, 12:45:26 AM] You: Sariii
+[7/6/26, 12:45:31 AM] You: Photo bhej
+[7/6/26, 12:48:24 AM] Sadhana Kantakutle: <album message>
+[7/6/26, 12:48:29 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:48:30 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:48:33 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:48:33 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:48:34 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:48:34 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:48:34 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:48:35 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:49:27 AM] You: Aalag bhej 🫩
+[7/6/26, 12:49:44 AM] Sadhana Kantakutle: Dusare nahi hai re
+[7/6/26, 12:50:13 AM] You: <image omitted>
+[7/6/26, 12:50:23 AM] You: Single single Bhej
+[7/6/26, 12:50:41 AM] Sadhana Kantakutle: <album message>
+[7/6/26, 12:50:42 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:50:43 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:50:43 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:50:44 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:50:44 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:50:45 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:50:45 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:50:45 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:50:46 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:50:46 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:53:05 AM] Sadhana Kantakutle: <album message>
+[7/6/26, 12:53:05 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:53:06 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:53:06 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 12:53:07 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 9:42:23 AM] You: Sadhana wo boat 🛶 me ka photo bhej
+[7/6/26, 10:13:32 AM] Sadhana Kantakutle: <album message>
+[7/6/26, 10:13:55 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 10:13:56 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 10:15:21 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 10:15:22 AM] Sadhana Kantakutle: <image omitted>
+[7/6/26, 11:45:07 AM] Sarii: <album message>
+[7/6/26, 11:45:30 AM] Sarii: <image omitted>
+[7/6/26, 11:45:30 AM] Sarii: <image omitted>
+[7/6/26, 11:46:35 AM] Sarii: <image omitted>
+[7/6/26, 11:48:32 AM] Sarii: <image omitted>
+[7/6/26, 11:53:57 AM] Sarii: <album message>
+[7/6/26, 11:53:58 AM] Sarii: <image omitted>
+[7/6/26, 11:54:10 AM] Sarii: <image omitted>
+[7/6/26, 11:54:11 AM] Sarii: <image omitted>
+[7/6/26, 11:54:12 AM] Sarii: <image omitted>
+[7/6/26, 11:54:12 AM] Sarii: <image omitted>
+[7/6/26, 11:54:24 AM] Sarii: <image omitted>
+[7/7/26, 12:57:04 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 12:57:05 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 12:59:23 PM] Sadhana Kantakutle: <album message>
+[7/7/26, 12:59:30 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 12:59:31 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 12:59:59 PM] You: <voice message omitted>
+[7/7/26, 1:00:45 PM] Sarii: Kiska
+[7/7/26, 1:00:46 PM] Sadhana Kantakutle: <album message>
+[7/7/26, 1:00:47 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 1:00:47 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 1:00:47 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 1:01:04 PM] Sadhana Kantakutle: Kiska
+[7/7/26, 1:02:03 PM] Sadhana Kantakutle: Bas na
+[7/7/26, 1:02:45 PM] You: Isska
+[7/7/26, 1:03:17 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 1:05:05 PM] Sadhana Kantakutle: Anuradha ka nahi hai
+[7/7/26, 1:05:06 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 1:05:07 PM] Sadhana Kantakutle: Ashumati ka hai dekha
+[7/7/26, 1:05:09 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 1:05:18 PM] Sarii: He chhan aahe g
+[7/7/26, 1:12:45 PM] You: ?
+[7/7/26, 1:16:51 PM] Sarii: <image omitted>
+[7/7/26, 5:24:25 PM] Sadhana Kantakutle: [Forwarded] <document omitted> file_00000000cf7c720b90f2eaa98e0390f4.pdf
+[7/7/26, 7:12:51 PM] You: 3 module ke answers send karo
+[7/7/26, 7:12:54 PM] You: Plzzz
+[7/7/26, 7:27:14 PM] Sadhana Kantakutle: Ok ok
+[7/7/26, 7:27:26 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 7:27:35 PM] Sadhana Kantakutle: <image omitted>
+[7/7/26, 7:28:52 PM] Sadhana Kantakutle: <video omitted>
+[7/7/26, 7:30:35 PM] Sadhana Kantakutle: <video omitted>
+[7/7/26, 7:37:26 PM] Sadhana Kantakutle: [Forwarded] <video omitted>
+[7/7/26, 7:37:27 PM] Sadhana Kantakutle: [Forwarded] <video omitted>
+[7/7/26, 7:48:09 PM] You: Mebi hu group me 😒🫥
+[7/7/26, 7:52:12 PM] Sadhana Kantakutle: Hu
+[7/7/26, 8:59:33 PM] Sadhana Kantakutle: Hi
+[7/7/26, 8:59:35 PM] Sadhana Kantakutle: Shivani
+[7/7/26, 8:59:56 PM] Sadhana Kantakutle: Mai Jo pdf send Kari dekha ohi padha Rahi hai na
+[7/7/26, 9:00:50 PM] You: Chatgpt se pad rahe hu
+[7/7/26, 9:01:10 PM] Sadhana Kantakutle: O bhi padhe to chalata na
+[7/7/26, 9:01:35 PM] You: Ha
+[7/7/26, 9:01:53 PM] Sadhana Kantakutle: Thik hai
+[7/7/26, 9:07:05 PM] You: K
+[7/8/26, 9:51:30 AM] Sadhana Kantakutle: <image omitted>
+[7/8/26, 6:27:30 PM] Sadhana Kantakutle: <image omitted>
+[7/8/26, 8:36:34 PM] Sadhana Kantakutle: <video omitted>
+[7/8/26, 8:44:58 PM] You: 4 question send kar
+[7/8/26, 9:07:46 PM] Sadhana Kantakutle: <album message>
+[7/8/26, 9:07:47 PM] Sadhana Kantakutle: <image omitted>
+[7/8/26, 9:07:47 PM] Sadhana Kantakutle: <image omitted>
+[7/10/26, 10:47:27 PM] You: Kal lunch ke baad aicte ko jayeng?
+[7/11/26, 10:31:31 AM] Sadhana Kantakutle: Hi
+[7/11/26, 10:31:45 AM] Sadhana Kantakutle: Dono bhi mobile ka location on karake aao
+[7/11/26, 10:31:53 AM] Sadhana Kantakutle: Code 111716 ha
+[7/11/26, 10:34:07 AM] You: Ohk
+[7/11/26, 10:34:26 AM] Sadhana Kantakutle: Hm
+[7/11/26, 11:37:54 AM] Sadhana Kantakutle: <image omitted>
+[7/11/26, 12:03:59 PM] Sarii: <image omitted>
+[7/11/26, 12:05:14 PM] Sadhana Kantakutle: Thab ale ch
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <album message>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:13 AM] You: <image omitted>
+[7/12/26, 11:19:14 AM] You: <image omitted>
+[7/12/26, 11:19:14 AM] You: <image omitted>
+[7/12/26, 11:19:14 AM] You: <image omitted>
+[7/12/26, 10:35:21 PM] You: <image omitted> 🤧
+[7/12/26, 10:37:52 PM] You: Tera friend hai vo? @Sadhana Kantakutle
+[7/12/26, 11:06:07 PM] Sadhana Kantakutle: Nahi ladaki hai o
+[7/13/26, 6:49:40 AM] You: Mera sweater lekar aaa
+[7/13/26, 7:36:52 AM] Sadhana Kantakutle: Ky
+[7/13/26, 7:36:59 AM] Sadhana Kantakutle: Hm
+[7/13/26, 3:37:31 PM] Sarii: <image omitted>
+[7/13/26, 5:01:22 PM] Sarii: Hi
+[7/13/26, 5:01:30 PM] Sarii: Shivani
+[7/13/26, 5:02:00 PM] Sarii: Tera phone lock kya he
+[7/13/26, 5:02:50 PM] - [Call]
+[7/14/26, 10:08:29 AM] Sadhana Kantakutle: Bol re
+[7/14/26, 10:08:32 AM] Sadhana Kantakutle: Shivani
+[7/15/26, 9:19:45 AM] You: vijaylaxmi banner leke gayi kya?
+[7/15/26, 9:20:18 AM] Sarii: Ha
+[7/15/26, 9:21:12 AM] You: thikey
+[7/15/26, 9:21:37 AM] You: pnchayt ka sign hua?
+[7/15/26, 9:22:16 AM] Sarii: Nhi
+[7/15/26, 9:22:27 AM] You: kyu
+[7/15/26, 9:22:51 AM] Sarii: Open nahi hota 10 ko hota he
+[7/15/26, 9:23:02 AM] You: thikey
+[7/15/26, 9:32:18 AM] Sarii: Hi
+[7/15/26, 9:32:23 AM] Sarii: Shivani
+[7/15/26, 9:33:00 AM] Sarii: Gram panchayat kiniye ko hai bolre
+[7/21/26, 7:01:37 PM] You: [Forwarded] use MongoLab
+
+db.createCollection("listingsAndReviews")
+
+db.listingsAndReviews.insertMany([
+{
+  listing_url: "https://airbnb.com/101",
+  name: "Sea View Apartment",
+  address: {
+    city: "Goa",
+    country: "India"
+  },
+  host: {
+    host_name: "Rahul",
+    host_picture_url: "https://image1.com"
+  },
+  picture_url: "https://room1.com"
+},
+{
+  listing_url: "https://airbnb.com/102",
+  name: "Mountain Cottage",
+  address: {
+    city: "Ooty",
+    country: "India"
+  },
+  host: {
+    host_name: "Priya"
+  },
+  picture_url: "https://room2.com"
+},
+{
+  listing_url: "https://airbnb.com/103",
+  name: "City Apartment",
+  address: {
+    city: "Bangalore",
+    country: "India"
+  },
+  host: {
+    host_name: "Anil",
+    host_picture_url: "https://image3.com"
+  },
+  picture_url: "https://room3.com"
+}
+])
+
+db.listingsAndReviews.find(
+{
+  "host.host_picture_url": { $exists: true }
+},
+{
+  _id: 0,
+  listing_url: 1,
+  name: 1,
+  address: 1,
+  host: 1,
+  picture_url: 1
+}
+)
+
+
+
+db.createCollection("ecommerce")
+
+db.ecommerce.insertMany([
+{
+  product_name: "Laptop",
+  review_summary: "Excellent performance and battery life."
+},
+{
+  product_name: "Mobile",
+  review_summary: "Good camera and smooth performance."
+},
+{
+  product_name: "Headphones",
+  review_summary: "Very comfortable with clear sound."
+}
+])
+
+db.ecommerce.find(
+{},
+{
+  _id: 0,
+  review_summary: 1
+}
+)
+[7/21/26, 11:19:04 PM] You: db.places.insertMany([
+{
+name:"College",
+location:{
+type:"Point",
+coordinates:[77.5946,12.9716]
+}
+},
+{
+name:"Library",
+location:{
+type:"Point",
+coordinates:[77.6000,12.9750]
+}
+}
+])
+[7/21/26, 11:19:12 PM] You: db.places.createIndex({location:"2dsphere"})
+[7/21/26, 11:19:18 PM] You: db.places.find({
+location:{
+$near:{
+$geometry:{
+type:"Point",
+coordinates:[77.5946,12.9716]
+},
+$maxDistance:5000
+}
+}
+})
+[7/21/26, 11:19:26 PM] You: db.flags.insertMany([
+{_id:1,value:5},
+{_id:2,value:10},
+{_id:3,value:15}
+])
+[7/21/26, 11:19:32 PM] You: db.flags.find({
+value:{$bitsAllSet:1}
+})
+[7/21/26, 11:19:41 PM] You: You deleted this message
+[7/21/26, 11:19:50 PM] You: You deleted this message
+[7/21/26, 11:19:56 PM] You: You deleted this message
+[7/29/26, 8:29:17 PM] - Sarii changed the group icon
+[7/29/26, 8:45:42 PM] Sadhana Kantakutle: Hi
+[7/29/26, 8:46:03 PM] You: Hiiiii
+[7/29/26, 8:46:04 PM] - Sadhana Kantakutle left
+[7/29/26, 8:46:09 PM] Sarii: Bola g
+[7/29/26, 8:46:14 PM] Sarii: Zal ka j1
+[7/29/26, 8:46:34 PM] You: Ha zal
+[7/29/26, 8:46:34 PM] Sarii: Kabar
+[7/29/26, 8:46:46 PM] You: Tera?
+[7/29/26, 8:48:00 PM] Sarii: Ha huva
+[7/29/26, 8:48:09 PM] Sarii: Sadhana ko kya huva
+[7/29/26, 8:48:37 PM] You: Nahi pata
+[7/29/26, 8:49:04 PM] - Sarii changed the group icon
+[7/29/26, 8:49:21 PM] Sarii: Dp
+[7/29/26, 8:51:07 PM] Sarii: Kya kar rhiho shivani
+[7/29/26, 8:57:24 PM] You: Kuch nahi
+[7/29/26, 8:57:31 PM] You: Tu?
+[7/29/26, 8:57:48 PM] Sarii: Soyi
+[7/29/26, 8:58:29 PM] Sarii: Sogye sab hamare gav mejaldi sotehe
+[7/29/26, 9:01:17 PM] You: 👍🏻
+[7/29/26, 9:02:45 PM] Sarii: This message was deleted
+[7/29/26, 9:03:49 PM] Sarii: This message was deleted
+[7/29/26, 9:04:26 PM] You: Sadhana ko add kar
+[7/29/26, 9:04:41 PM] - You added Sadhana Kantakutle
+[7/29/26, 9:04:52 PM] You: Kare me
+[7/29/26, 9:04:58 PM] Sarii: Nako muze maregi
+[7/29/26, 9:05:05 PM] You: .
+[7/29/26, 9:05:11 PM] Sarii: Ha
+[7/29/26, 9:05:23 PM] Sarii: Me photo delete kari
+[7/29/26, 9:05:31 PM] You: Ha
+[7/29/26, 9:05:39 PM] Sarii: Or kya
+[7/29/26, 9:07:58 PM] You: Kuch nahi 🙃
+[7/29/26, 9:08:10 PM] - Sarii changed the group icon
+[7/29/26, 9:08:20 PM] Sarii: Hmm
+[7/29/26, 9:09:50 PM] Sadhana Kantakutle: Khana khai ky nahi
+[7/29/26, 9:22:52 PM] You: Hua
+[7/29/26, 9:22:55 PM] You: Tera?
+[7/29/26, 9:23:19 PM] Sadhana Kantakutle: Ha huwa
+[7/31/26, 9:15:22 PM] You: Activity complete huaa🥳
+[7/31/26, 9:16:54 PM] Sarii: Thank you 🥰
+[7/31/26, 9:44:26 PM] Sadhana Kantakutle: Oo thank you ☺️
+[8/4/26, 1:26:56 PM] You: [Forwarded] https://docs.google.com/spreadsheets/d/1AnZvy_h_Pxe9QQAYhLLP4gKDDuV4mVHQcpRlwPTBISo/edit?usp=sharing
+[8/4/26, 1:28:00 PM] Sadhana Kantakutle: <album message>
+[8/4/26, 1:28:00 PM] Sadhana Kantakutle: <image omitted>
+[8/4/26, 1:28:01 PM] Sadhana Kantakutle: <image omitted>
+[8/4/26, 1:28:01 PM] Sadhana Kantakutle: <image omitted>
+[8/9/26, 7:03:11 PM] You: [Forwarded] https://youtu.be/Zr06LyUupMU?si=KyNXH-9sZlwCVUMD
+[8/9/26, 7:03:11 PM] You: [Forwarded] Instead of this watch Agrawals text book
+[8/14/26, 9:12:51 AM] Sarii: [Forwarded] <image omitted> Schedule for registration of students admitted to higher semester
+[8/14/26, 10:40:03 AM] You: ?
+[8/14/26, 4:24:21 PM] - [Call]
+[8/14/26, 4:24:59 PM] You: Evening I will call
+[8/14/26, 4:25:08 PM] You: Everyone is sleeping
+[8/14/26, 4:25:52 PM] Sadhana Kantakutle: Ok
+[8/15/26, 6:30:32 AM] Sarii: Why
+[8/15/26, 6:30:47 AM] Sarii: Hi
+[8/15/26, 6:30:56 AM] Sarii: Kya huva re
+[8/16/26, 3:38:42 PM] Sarii: Hi
+[8/16/26, 3:39:02 PM] Sarii: Me Belgaum ko ja rhi hu
+[8/16/26, 3:40:57 PM] You: Why?
+[8/16/26, 3:41:33 PM] Sarii: Didi ka bag denekeliye
+[8/16/26, 3:48:17 PM] You: Didi?
+[8/16/26, 3:49:48 PM] Sarii: Anjali didi ka he
+[8/16/26, 4:07:18 PM] You: Ohkkk
+[8/16/26, 4:10:33 PM] Sadhana Kantakutle: Kava chalis g
+[8/16/26, 5:52:41 PM] Sarii: Aaj
+[8/16/26, 6:05:29 PM] Sadhana Kantakutle: Nighalis ka
+[8/16/26, 6:05:35 PM] Sadhana Kantakutle: Kon kon chalav
+[8/16/26, 6:05:44 PM] Sarii: Ha
+[8/16/26, 6:05:52 PM] Sarii: Jyoti ani me
+[8/16/26, 6:06:01 PM] Sarii: Kabar yenaris ka
+[8/16/26, 6:06:02 PM] Sadhana Kantakutle: Ha
+[8/16/26, 6:06:11 PM] Sadhana Kantakutle: Nahi re addmission ch mhant hote
+[8/16/26, 6:06:26 PM] Sarii: Mahiti nahi mala bi
+[8/16/26, 6:06:40 PM] Sadhana Kantakutle: Ha
+[8/16/26, 6:06:43 PM] Sadhana Kantakutle: Kava yenar ahes
+[8/16/26, 6:20:36 PM] Sarii: Mahiti nahi aajun sangte
+[8/16/26, 6:53:40 PM] Sadhana Kantakutle: Hm
+[8/16/26, 9:21:56 PM] Sadhana Kantakutle: Mala mhanav ka g mi pan yenar 
+Hote
+[8/16/26, 10:26:37 PM] Sarii: Tu bhaiya kad geli aahes ki manun  kahi manale nahi
+[8/16/26, 10:29:17 PM] Sarii: aachankcha chale aahe g mecha Konalabi mahit nahi me chalev manun
+[8/16/26, 10:54:51 PM] Sadhana Kantakutle: Ale tavach
+[8/16/26, 10:55:00 PM] Sadhana Kantakutle: Hm
+[8/16/26, 10:55:24 PM] Sadhana Kantakutle: Addmission karun ye mg gelis tar ata karayach ahe mhan addmission
+[8/17/26, 4:36:57 AM] Sarii: Bagte ani tula sangte
+[8/17/26, 7:17:07 AM] Sadhana Kantakutle: Sangte mhanayala ky gelis tar karun ye ki
+[8/17/26, 7:23:01 AM] Sarii: This message was deleted
+[8/17/26, 7:23:41 AM] Sarii: Vicharte aadhi mang sangte
+[8/17/26, 7:23:52 AM] Sadhana Kantakutle: Hm
+[8/17/26, 11:48:36 AM] You: Me bhi hu group me🫩🫩
+[8/17/26, 12:26:58 PM] Sadhana Kantakutle: Tuze bhi ata maarathi
+[8/17/26, 12:28:48 PM] You: ???
+[8/17/26, 12:30:02 PM] Sadhana Kantakutle: Marathi re
+[8/17/26, 12:45:51 PM] You: Phir bhi🥲
+[8/17/26, 12:46:08 PM] You: @Sarii room ka Puch
+[8/17/26, 12:46:15 PM] You: Hostel ka
+[8/17/26, 4:11:35 PM] Sarii: Kya bolke
+[8/17/26, 4:21:19 PM] You: Which hostel will they give us??
+[8/18/26, 12:38:32 PM] You: <image omitted>
+[8/18/26, 12:38:49 PM] You: <image omitted>
+[8/18/26, 12:40:34 PM] Sadhana Kantakutle: Mera 3rd sem ka hai kay bhej
+[8/18/26, 12:41:49 PM] You: Nahi mila
+[8/18/26, 12:45:37 PM] Sadhana Kantakutle: Ha ha
+[8/18/26, 12:45:39 PM] Sadhana Kantakutle: Thik hai
+[8/18/26, 12:45:47 PM] Sarii: <image omitted>
+[8/18/26, 1:00:34 PM] You: [Forwarded] caste-2(A)
+father - prabhu v sambare
+mother- vidya p sambare
+Dob : 25-02-2006
+blood group - A+ 
+mail - shivanisambare7@gmail.com 
+mobile - 9110210789
+Father occupation - Bussiness 
+Mother - NA
+Father income - 1,60,000 
+Correspondence Adress/ permanent Address: Prabhu Nivas , Gandhingar Hukkeri , Dist - Belgaum 
+city - Hukkeri  
+Parent - 9620133025
+mother tongue - Kannada 
+Religion - Hindu ( Banasagi)
+Nationality - Indian 
+Bank name : Canara bank 
+Account no : 05132200030281
+IFSC : CNRB0010513
+Adhar no : 572499079037
+[8/18/26, 1:00:47 PM] You: You deleted this message
+[8/18/26, 1:00:48 PM] You: <image omitted> 3
+[8/18/26, 1:00:48 PM] You: <image omitted> 1
+[8/18/26, 1:00:48 PM] You: <image omitted> 2
+[8/18/26, 1:01:33 PM] You: <image omitted> 4
+[8/18/26, 1:02:25 PM] You: Ic ko idra se dal
+[8/18/26, 1:08:35 PM] Sarii: Pappa ki email ID send kar
+[8/18/26, 1:11:38 PM] You: Prabhusambare@gmail.com
+[8/18/26, 1:54:22 PM] Sarii: Income caste send karo
+[8/18/26, 1:54:56 PM] You: <image omitted>
