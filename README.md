@@ -21,7 +21,7 @@ Name: Shivani Sambare
 
 ## Dataset
 
-*chat.txt`
+* chat.txt`
 
 ## Run Instructions
 
