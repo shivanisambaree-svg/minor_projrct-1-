@@ -1,8 +1,8 @@
-GroupDNA – WhatsApp Group Analysis
+## GroupDNA – WhatsApp Group Analysis
 
 Name: Shivani Sambare
 
-Features
+## Features
 
 * Chat Parser
 * Group Overview
@@ -12,7 +12,7 @@ Features
 * Silent Streak Analysis
 * Personality Archetypes
 
-Technologies Used
+## Technologies Used
 
 * Python
 * Regular Expressions (`re`)
